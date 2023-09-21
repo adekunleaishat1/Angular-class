@@ -1,0 +1,37 @@
+<div>
+    <form (ngSubmit)="login()" class="w-50 mx-auto bg-white p-3 card" action="">
+        <div class="form-group">
+            <label for="username">Username</label>
+           <input
+           class="form-control"
+            name="username"
+            [(ngModel)]="username"
+            minlength="5"
+            #usernamme="ngModel"
+            [class.is-invalid]="usernamme.touched && usernamme.invalid"
+            [class.is-valid]="usernamme.touched && usernamme.valid"
+              type="text"
+             required="true" >
+               <div *ngIf="usernamme.touched">
+                   <span *ngIf="usernamme?.errors?.['required']">This input field is required</span>
+                   <span *ngIf="usernamme?.errors?.['minlength']">Username cannot be lessthan 5 characters</span>
+               </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input  [(ngModel)]="password"
+            minlength="6"
+            #passwordd="ngModel"
+            [class.is-invalid]="passwordd.touched && passwordd.invalid"
+            [class.is-valid]="passwordd.touched && passwordd.valid"
+             class="form-control"
+              type="password" name="password"
+               required="true" >
+            <div *ngIf="passwordd.touched">
+                <span *ngIf="passwordd?.errors?.['required']">This input field is required</span>
+                <span *ngIf="passwordd?.errors?.['minlength']">Password cannot be lessthan 5 characters</span>
+            </div>  
+        </div>
+        <button class="btn btn-dark mt-3">Login</button>
+    </form>
+</div>

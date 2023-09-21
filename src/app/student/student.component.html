@@ -1,0 +1,141 @@
+<body>
+  <!-- <div>
+        <h1>Students Dashboard</h1>
+    </div> -->
+  <div class="cont">
+    <div class="left">
+      <form class="form">
+        <div class="header">Sign In</div>
+        <div class="inputs">
+          <input
+            [(ngModel)]="student.name"
+            placeholder="Student Name"
+            name="username"
+            class="input"
+            type="text"
+          />
+          <input
+            [(ngModel)]="student.class"
+            placeholder="Class"
+            name="class"
+            class="input"
+            type="text"
+          />
+          <input
+            [(ngModel)]="student.email"
+            placeholder="Email"
+            name="email"
+            class="input"
+            type="text"
+          />
+          <div class="checkbox-container">
+            <label class="checkbox">
+              <input type="checkbox" id="checkbox" />
+            </label>
+            <label for="checkbox" class="checkbox-text">Remember me</label>
+          </div>
+          <button (click)="adduser()" class="sigin-btn">Submit</button>
+          <a class="forget" href="#">Forget password ?</a>
+          <p class="signup-link">
+            Don't have an account? <a href="#">Sign up</a>
+          </p>
+        </div>
+      </form>
+    </div>
+    <div class="side">
+      <h1 class="text-center" *ngIf="allstudent.length == 0">No user Available</h1>
+      <table *ngIf="allstudent.length > 0">
+        <tr>
+          <td>S/N</td>
+          <td>Name</td>
+          <td>Class</td>
+          <td>Email</td>
+          <td>Delete</td>
+          <td>Edit</td>
+        </tr>
+        <tr *ngFor="let student of allstudent; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ student.name }}</td>
+          <td>{{ student.class }}</td>
+          <td>{{ student.email }}</td>
+          <td>
+            <button class="btn btn-outline-danger" (click)="del(i)">
+              &times;
+            </button>
+          </td>
+          <td>
+            <button
+              type="button"
+              class="btn btn-success"
+              data-bs-toggle="modal"
+              [attr.data-bs-target]="'#exampleModal-' + i"
+              (click)="edit(i)"
+            >
+              edit
+            </button>
+          </td>
+        </tr>
+      </table>
+      <ng-container *ngFor="let student of allstudent; let i = index">
+        <div
+          class="modal fade"
+          [id]="'exampleModal-' + i"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Modal title
+                </h1>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <input
+                  [(ngModel)]="editStudent.name"
+                  placeholder="Student Name"
+                  name="username"
+                  class="input"
+                  type="text"
+                />
+                <input
+                  [(ngModel)]="editStudent.class"
+                  placeholder="Class"
+                  name="class"
+                  class="input"
+                  type="text"
+                />
+                <input
+                  [(ngModel)]="editStudent.email"
+                  placeholder="Email"
+                  name="email"
+                  class="input"
+                  type="text"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="button" class="btn btn-primary"  data-bs-dismiss="modal" (click)="saveChanges(i)">
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</body>
